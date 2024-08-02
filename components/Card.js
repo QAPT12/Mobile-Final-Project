@@ -13,7 +13,7 @@ export default function Card({props}) {
         <View style={styles.container}>
             {/* <Image source={{uri: `${ props['imageLink']}`}} style={styles.image}/> */}
             <Image
-                source={imageError ? require('./../assets/placeholder.jpeg') : { uri : props['imageLink'] }} 
+                source={imageError ? require('./../assets/placeholder.jpeg') : { uri : `${props['imageLink']}` }} 
                 style={styles.image}
                 onError={handleImageError}
             />

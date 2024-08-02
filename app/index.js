@@ -35,13 +35,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#f5f5f5',
+        flex: 1,
     },
     navButtons: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 20,
+        marginTop: 10,
     },
 })

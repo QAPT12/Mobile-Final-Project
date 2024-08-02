@@ -2,6 +2,11 @@ import { Slot } from 'expo-router';
 import NavBar from '../components/NavBar';
 import { SQLiteProvider } from 'expo-sqlite';
 import * as SQLite from 'expo-sqlite';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fab, fas);
 
 export default function HomeLayout() {
 

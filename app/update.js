@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import Button from '../components/Button';
 import { useSQLiteContext } from 'expo-sqlite';
+import { TextInput } from 'react-native-paper';
 
 const update = () => {
   const [index, setIndex] = useState(0)
