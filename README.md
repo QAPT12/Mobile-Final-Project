@@ -7,9 +7,9 @@ The Top Magic Cards App allows you to access and manage information about Magic:
 It features a user-friendly interface, efficient data handling, and image dispaly using Scryfall image links. 
 
 ## Features
-Card Management: View and manage a collection of Magic: The Gathering cards.
-Offline Access: Access card information even when offline using SQLite.
-User-Friendly Interface: Sleek and intuitive UI using React Native Paper.
+- Card Management: View and manage a collection of Magic: The Gathering cards.
+- Offline Access: Access card information even when offline using SQLite.
+- User-Friendly Interface: Sleek and intuitive UI using React Native Paper.
 
 ## Dependencies/ Components used
 [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite/): Used for local database management to store and access card data offline.
@@ -20,9 +20,9 @@ User-Friendly Interface: Sleek and intuitive UI using React Native Paper.
 ## Getting Started
 To get started with the Top Magic Cards App, follow these steps:
 
-Clone the Repository: git clone https://github.com/your-repo/top-magic-cards-app.git
-Install Dependencies: npm install
-Run the App: npm start
+- Clone the Repository: git clone https://github.com/your-repo/top-magic-cards-app.git
+- Install Dependencies: npm install
+- Run the App: npm start
 
 ## Contributing
 We welcome contributions from the community. To contribute, please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
