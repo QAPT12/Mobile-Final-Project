@@ -12,10 +12,10 @@ It features a user-friendly interface, efficient data handling, and image dispal
 - User-Friendly Interface: Sleek and intuitive UI using React Native Paper.
 
 ## Dependencies/ Components used
-[expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite/): Used for local database management to store and access card data offline.
-[expo-router](https://docs.expo.dev/router/introduction/): Handles navigation within the app, providing a smooth user experience.
-[react-native-paper](https://callstack.github.io/react-native-paper/): Adds FontAwesome icons to the app for better visual appeal and intuitive navigation.
-[react-native-fontawesome](https://docs.fontawesome.com/web/use-with/react-native): Provides a set of high-quality, customizable UI components for building the app's interface.
+1. [expo-sqlite](https://docs.expo.dev/versions/latest/sdk/sqlite/): Used for local database management to store and access card data offline.
+2. [expo-router](https://docs.expo.dev/router/introduction/): Handles navigation within the app, providing a smooth user experience.
+3. [react-native-paper](https://callstack.github.io/react-native-paper/): Adds FontAwesome icons to the app for better visual appeal and intuitive navigation.
+4. [react-native-fontawesome](https://docs.fontawesome.com/web/use-with/react-native): Provides a set of high-quality, customizable UI components for building the app's interface.
 
 ## Getting Started
 To get started with the Top Magic Cards App, follow these steps:
