@@ -5,13 +5,14 @@ import * as SQLite from 'expo-sqlite';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { StyleSheet } from 'react-native';
 
 library.add(fab, fas);
 
 export default function HomeLayout() {
 
     return (
-        <SQLiteProvider databaseName='cards.db' onInit= { initializeDatabase }>
+        <SQLiteProvider databaseName='cards.db' onInit= { initializeDatabase } style={styles.HomeLayout}>
             <Slot />
             <NavBar />
         </SQLiteProvider>
@@ -32,3 +33,9 @@ async function initializeDatabase() {
         await db.runAsync(`INSERT INTO cards (name, releaseSet, color, imageLink) VALUES (?, ?, ?, ?)`, "The Rack", "Antiquities", "Colorless", "https://cards.scryfall.io/large/front/e/c/ec0686ba-1277-4412-a397-7a6227808311.jpg?1562944784");
     }
 }
+
+const styles = StyleSheet.create({
+    HomeLayout: {
+        backgroundColor: '#3e3b4f',
+    }
+});

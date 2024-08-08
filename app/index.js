@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSQLiteContext } from "expo-sqlite";
 import Button from "../components/Button";
 import Card from "../components/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 export default function App() {
     const database = useSQLiteContext();
@@ -24,8 +25,8 @@ export default function App() {
                 <View style={styles.container}>
                     <Card props={cards[index]} />
                     <View style={styles.navButtons}>
-                        <Button label={'Prev'} onPress={() => setIndex(Math.max(index - 1, 0))}></Button>
-                        <Button label={'Next'} onPress={() => setIndex(Math.min(index + 1, cards.length - 1))}></Button>
+                        <Button label={"fa-arrow-left"} faIcon={true} onPress={() => setIndex(Math.max(index - 1, 0))}></Button>
+                        <Button label={"fa-arrow-right"} faIcon={true} onPress={() => setIndex(Math.min(index + 1, cards.length - 1))}></Button>
                     </View>
                 </View>
             );
@@ -38,12 +39,11 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#4a4a6a',
         flex: 1,
     },
     navButtons: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 10,
     },
 })

@@ -17,6 +17,12 @@ function NavBar() {
                     <Text style={styles.text}>Edit</Text>
                 </Pressable>
             </Link>
+            <Link href={'/add'} asChild>
+                <Pressable style={styles.button}>
+                    <FontAwesomeIcon icon="fa-circle-plus" size={20} style={styles.icon}/>
+                    <Text style={styles.text}>Add</Text>
+                </Pressable>
+            </Link>
         </View>
     );
 }
@@ -25,6 +31,7 @@ export default NavBar;
 
 const styles = StyleSheet.create({
     navBar: {
+        minHeight: 100,
         flexDirection: 'row',
         justifyContent: 'space-around',
         backgroundColor: '#060185',

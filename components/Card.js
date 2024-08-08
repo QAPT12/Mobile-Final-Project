@@ -1,8 +1,8 @@
 import { Text, Image, StyleSheet, View } from 'react-native';
 import { useState } from 'react';
+import { Divider as Div}  from 'react-native-paper';
 
-export default function Card({props}) {
-
+export default function Card({ props }) {
     const [imageError, setImageError] = useState(false);
 
     const handleImageError = () => {
@@ -11,30 +11,32 @@ export default function Card({props}) {
 
     return (
         <View style={styles.container}>
-            {/* <Image source={{uri: `${ props['imageLink']}`}} style={styles.image}/> */}
             <Image
-                source={imageError ? require('./../assets/placeholder.jpeg') : { uri : `${props['imageLink']}` }} 
+                source={imageError ? require('./../assets/placeholder.jpeg') : { uri: `${props['imageLink']}` }}
                 style={styles.image}
                 onError={handleImageError}
+                resizeMode="contain"
             />
-            <Text style={styles.name}>Card Name: { props['name'] }</Text>
-            <Text style={styles.text}>Color: { props['color']}</Text>
-            <Text style={styles.text}>Set Released: { props['releaseSet']}</Text>
+            <Div style={styles.spacer}></Div>
+            <Text style={styles.name}>Card Name: {props['name']}</Text>
+            <Text style={styles.text}>Color: {props['color']}</Text>
+            <Text style={styles.text}>Set Released: {props['releaseSet']}</Text>
         </View>
     );
 }
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
-        marginTop: 50,
+        justifyContent: 'center',
         alignItems: 'center',
+        padding: 15,
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 5,
+        marginBottom: 10,
+        color: 'white',
     },
     image: {
         width: 300,
@@ -43,6 +45,10 @@ const styles = StyleSheet.create ({
     },
     text: {
         fontSize: 16,
-        marginBottom: 5,
+        marginBottom: 10,
+        color: 'white',
+    },
+    spacer: {
+        height:20,
     }
 });

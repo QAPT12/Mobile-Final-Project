@@ -4,34 +4,25 @@ import Button from '../components/Button';
 import { useSQLiteContext } from 'expo-sqlite';
 import { TextInput } from 'react-native-paper';
 
-const update = () => {
-  const [index, setIndex] = useState(0)
-
+const Update = () => {
+  const [index, setIndex] = useState(0);
   const [waiting, setWaiting] = useState(true);
-
-
   const [newCard, updateNewCard] = useState({
-    "name":"", "releaseSet":"", "color":"", "imageLink":""
-  })
+    name: "", releaseSet: "", color: "", imageLink: ""
+  });
 
   const db = useSQLiteContext();
   const [cards, setCards] = useState([]);
 
-  const insertNewCard = async (name, uri, releaseSet, color) => {
-    console.log(name, uri, releaseSet, color)
+  const updateCards = async (name, uri, releaseSet, color, cardToReplace) => {
+    console.log(name, uri, releaseSet, color);
     await db.runAsync(`
-      INSERT INTO cards (name, releaseSet, color, imageLink) VALUES (?, ?, ?, ?, ?)`, name,releaseSet,color,uri);
-    }
-
-  const updateCards = async (name, uri, releaseSet,  color, cardToReplace) => {
-    console.log(name, uri, releaseSet,  color)
-    await db.runAsync(`
-      UPDATE cards SET name = ?, releaseSet = ?,  color = ?, imageLink = ? WHERE name = ?`, name,releaseSet,color,uri,cardToReplace);
-    }
+      UPDATE cards SET name = ?, releaseSet = ?, color = ?, imageLink = ? WHERE name = ?`, name, releaseSet, color, uri, cardToReplace);
+  }
 
   const removeCard = async (name) => {
     await db.runAsync(`
-      DELETE FROM cards WHERE name = ? `, name)
+      DELETE FROM cards WHERE name = ?`, name);
   }
 
   useEffect(() => {
@@ -43,74 +34,82 @@ const update = () => {
     setup();      
   }, []);
 
-if(!waiting){
- return (
-    <View style={styles.container}>
-     <Text>Card to Replace</Text>
-     <Text style={styles.cardName}>{ cards[index].name }</Text>
-     <View style={styles.buttonBar}> 
-        <Button label={"Prev"} onPress={()=> setIndex(Math.max(index - 1, 0))}></Button>
-        <Button label={'Next'} onPress={()=> setIndex(Math.min(index + 1, cards.length - 1))}></Button>
-     </View>
-      <TextInput
-        style={styles.input}
-        placeholder="Paste Image URL here"
-        onChangeText={image => updateNewCard({...newCard, imageLink:image})}
-        placeholderTextColor="#888"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="New Name"
-        onChangeText={name => updateNewCard({...newCard, name:name})}
-        placeholderTextColor="#888"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="New Release Set"
-        onChangeText={releaseSet => updateNewCard({...newCard, releaseSet:releaseSet})}
-        placeholderTextColor="#888"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="New color"
-        onChangeText={color => updateNewCard({...newCard, color:color})}
-        placeholderTextColor="#888"
-      />
-      <View style={styles.buttonBar}>
-        <Button label={"Commit Change"} onPress={() => {
-          updateCards(newCard.name, newCard.imageLink, newCard.releaseSet, newCard.color, cards[index].name)
-        }}></Button>
-       </View>
-      <View style={styles.buttonBar}>
-        <Button label={"Add New Card"} onPress={() => {
-          insertNewCard(newCard.name, newCard.imageLink, newCard.releaseSet, newCard.color)
-        }}></Button>
-        <Button label={"Delete This Card"} onPress={() => {
-          removeCard(cards[index].name)
-        }}></Button>
+  useEffect(() => {
+    if (cards.length > 0) {
+      const card = cards[index];
+      updateNewCard({
+        name: card.name,
+        releaseSet: card.releaseSet,
+        color: card.color,
+        imageLink: card.imageLink
+      });
+    }
+  }, [index, cards]);
+
+  if (!waiting) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Card to Replace: </Text>
+        <Text style={styles.cardName}>{cards[index].name}</Text>
+        <View style={styles.buttonBar}> 
+          <Button label={"fa-arrow-left"} faIcon={true} onPress={() => setIndex(Math.max(index - 1, 0))} />
+          <Button label={'fa-arrow-right'} faIcon={true} onPress={() => setIndex(Math.min(index + 1, cards.length - 1))} />
+        </View>
+        <TextInput
+          style={styles.input}
+          label={"Image URL"}
+          placeholder="Paste Image URL here"
+          value={newCard.imageLink}
+          onChangeText={image => updateNewCard({...newCard, imageLink: image})}
+          placeholderTextColor="#888"
+        />
+        <TextInput
+          style={styles.input}
+          label={"Card Name"}
+          placeholder="New Name"
+          value={newCard.name}
+          onChangeText={name => updateNewCard({...newCard, name: name})}
+          placeholderTextColor="#888"
+        />
+        <TextInput
+          style={styles.input}
+          label={"Release Set"}
+          placeholder="New Release Set"
+          value={newCard.releaseSet}
+          onChangeText={releaseSet => updateNewCard({...newCard, releaseSet: releaseSet})}
+          placeholderTextColor="#888"
+        />
+        <TextInput
+          style={styles.input}
+          label={"Color"}
+          placeholder="New Color"
+          value={newCard.color}
+          onChangeText={color => updateNewCard({...newCard, color: color})}
+          placeholderTextColor="#888"
+        />
+        <View style={styles.buttonBar}>
+          <Button label={"Commit Change"} faIcon={false} onPress={() => {
+            updateCards(newCard.name, newCard.imageLink, newCard.releaseSet, newCard.color, cards[index].name);
+          }} />
+        </View>
+        <View style={styles.buttonBar}>
+          <Button label={"Delete This Card"} faIcon={false} onPress={() => {
+            removeCard(cards[index].name);
+          }} />
+        </View>
       </View>
-    </View>
-  );
+    );
   }
+
+  return null; // Render nothing while waiting
 }
 
 const styles = StyleSheet.create({
-  label: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 13,
-    borderRadius: 5,
-    width: 200,
-    fontSize: 20,
-    color: '#333',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
   container: {
     padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#3e3b4f',
     flex: 1,
   },
   input: {
@@ -123,8 +122,16 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: '#fff',
   },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'white',
+    marginBottom: 10,
+  },
   cardName: {
     fontWeight: "bold",
+    fontSize: 16,
+    color: 'white',
   },
   buttonBar: {
     flexDirection: "row",
@@ -132,4 +139,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default update;
+export default Update;
