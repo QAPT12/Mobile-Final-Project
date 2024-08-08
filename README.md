@@ -28,5 +28,5 @@ To get started with the Top Magic Cards App, follow these steps:
 We welcome contributions from the community. To contribute, please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License
 
